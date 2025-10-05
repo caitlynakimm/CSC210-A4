@@ -60,9 +60,16 @@ public class CardGame extends JComponent {
 	pile[4] = new CardPile(2,402);
 
         // Add code here to turn over all the cards
-    List<Card> allCards = new LinkedList<>();
-    ListIterator<Card> position = position.listIterator(pile[0]);
-
+    //ListIterator goes through each pile to flip all the cards
+    for (CardPile p: pile) {
+        ListIterator<Card> selectedPile = p.listIterator();
+        while (selectedPile.hasNext()) {
+            Card c = selectedPile.next();
+            if (!c.getIsFaceUp()){
+                c.flipCard();
+            }
+        }
+    }
 
         // Sample card movements. 
         // Uncomment these one at a time to see what they do.
@@ -72,7 +79,12 @@ public class CardGame extends JComponent {
     pile[1].addFirst(pile[0].removeFirst()); //move pile 0's unflipped first card to pile 1, under the flipped card
 
         // Now add your card movements for stage 1 here.
-        // FILL IN
+    pile[2].addFirst(pile[0].remove(0));
+    pile[2].addFirst(pile[0].remove(0));
+    pile[3].addLast(pile[1].removeFirst());
+    pile[3].getFirst().flipCard();
+    pile[4].addAll(pile[0]);
+    pile[4].remove(1);
 
         // Once you have written the split() method in CardPile 
         // you can uncomment and test the line below.
