@@ -1,5 +1,7 @@
 import java.awt.*;
 import java.awt.event.*;
+import java.util.ListIterator;
+
 import javax.swing.*;
 
 /**
@@ -58,14 +60,16 @@ public class CardGame extends JComponent {
 	pile[4] = new CardPile(2,402);
 
         // Add code here to turn over all the cards
-        // FILL IN
+    List<Card> allCards = new LinkedList<>();
+    ListIterator<Card> position = position.listIterator(pile[0]);
+
 
         // Sample card movements. 
         // Uncomment these one at a time to see what they do.
-	//pile[0].getLast().flipCard();
-        //pile[1].addLast(pile[0].removeLast());
-        //pile[1].addLast(pile[0].removeLast());
-        //pile[1].addFirst(pile[0].removeFirst());
+	pile[0].getLast().flipCard(); //flips last card --> Ace
+    pile[1].addLast(pile[0].removeLast()); //move pile 0's flipped last card to pile 1
+    pile[1].addLast(pile[0].removeLast()); //move pile 0's unflipped last card to pile 1, set on top of first card
+    pile[1].addFirst(pile[0].removeFirst()); //move pile 0's unflipped first card to pile 1, under the flipped card
 
         // Now add your card movements for stage 1 here.
         // FILL IN
