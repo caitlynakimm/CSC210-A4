@@ -88,7 +88,7 @@ public class CardGame extends JComponent {
 
         // Once you have written the split() method in CardPile 
         // you can uncomment and test the line below.
-        //pile[2].addAll(pile[0].split(pile[0].get(26)));
+        pile[2].addAll(pile[0].split(pile[0].get(26)));
 
         // Next try other uses of split.
         // Then try out the various insert methods.

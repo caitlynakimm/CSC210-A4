@@ -77,7 +77,11 @@ public class CardPile extends LinkedList<Card> {
      * @param mark New card goes after this one
      */
     public void insertAfter(Card card, Card mark) {
-        // FILL IN
+        ListIterator<Card> position = listIterator(size());
+        while (position.hasNext() && (position.next() != mark)) {
+
+        }
+        position.add(card);
     }
 
     /**
@@ -105,7 +109,37 @@ public class CardPile extends LinkedList<Card> {
      * @param mark   insert after this point
      */
     public void insertAfter(CardPile insert, Card mark) {
-        // FILL IN
+        ListIterator<Card> position = listIterator(size());
+        while (position.hasNext() && (position.next() != mark)) {
+
+        }
+        while (insert.size() > 0) {
+            position.add(insert.removeFirst());
+        }
+    }
+
+    public ListIterator<Card> iteratorBefore(Card mark) {
+        ListIterator<Card> position = listIterator(size());
+        
+        while (position.hasPrevious()) {
+            Card c = position.previous();
+            if (c == mark) {
+                return position;
+            }
+        }
+        return listIterator(size());
+    }
+
+    public ListIterator<Card> iteratorAfter(Card mark) {
+        ListIterator<Card> position = listIterator(size());
+
+        while (position.hasNext()) {
+            Card c = position.next();
+            if (c == mark) {
+                return position;
+            }
+        }
+        return listIterator(size());
     }
 
     /**
@@ -118,7 +152,8 @@ public class CardPile extends LinkedList<Card> {
      */
     public CardPile split(Card mark) {
         // FILL IN -- return value below is temporary, for clean compile
-        return null;
+        CardPile newPile = new CardPile(0,0);
+        return newPile;
     }
 
     /**
