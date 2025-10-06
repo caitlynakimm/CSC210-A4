@@ -118,28 +118,30 @@ public class CardPile extends LinkedList<Card> {
         }
     }
 
+    /**
+     * Find an iterator just before the mark
+     *
+     * @param mark New card goes before this one
+     */
     public ListIterator<Card> iteratorBefore(Card mark) {
         ListIterator<Card> position = listIterator(size());
-        
-        while (position.hasPrevious()) {
-            Card c = position.previous();
-            if (c == mark) {
-                return position;
-            }
+        while (position.hasPrevious() && (position.previous() != mark)) {
+            // keep going until we find our card
         }
-        return listIterator(size());
+        return position;
     }
 
+    /**
+     * Find an iterator just after the mark
+     *
+     * @param mark New card goes after this one
+     */
     public ListIterator<Card> iteratorAfter(Card mark) {
         ListIterator<Card> position = listIterator(size());
-
-        while (position.hasNext()) {
-            Card c = position.next();
-            if (c == mark) {
-                return position;
-            }
+        while (position.hasNext() && (position.next() != mark)) {
+            // keep going until we find our card
         }
-        return listIterator(size());
+        return position;
     }
 
     /**
@@ -153,6 +155,10 @@ public class CardPile extends LinkedList<Card> {
     public CardPile split(Card mark) {
         // FILL IN -- return value below is temporary, for clean compile
         CardPile newPile = new CardPile(0,0);
+        if (mark == null) {
+            newPile.insertAfter(card, mark);
+        }
+
         return newPile;
     }
 
