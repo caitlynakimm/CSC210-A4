@@ -4,7 +4,7 @@ Your readme should include the following information. **Each student** needs to 
 
 ## Submission Details
 
-Your Name:
+Your Name: Caitlyn Kim
 
 
 Programming Partner Name (if you are submitting identical code):
@@ -14,7 +14,7 @@ Other Collaborators (submitting related but non-identical code):
 
 
 Kudos/shout-out to particularly helpful members of the class or teaching staff:
-
+- 
 
 Any references used besides JavaDoc and course materials:
 

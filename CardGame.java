@@ -234,11 +234,15 @@ public class CardGame extends JComponent {
         /** Click event handler */
         public void mouseClicked(MouseEvent e) {
             if (e.getClickCount() == 2) {
-		System.out.println("Mouse double click event at ("+e.getX()+","+e.getY()+").");
+		        System.out.println("Mouse double click event at ("+e.getX()+","+e.getY()+").");
                 CardPile currentPile = locatePile(e.getX(), e.getY());
                 Card doubleClickedCard = locateCard(e.getX(), e.getY());
-                ListIterator<Card> beforeCardIterator = currentPile.iteratorBefore(doubleClickedCard); // get iterator position just before mark, then move mark and all cards after
-
+                ListIterator<Card> posBeforeCard = currentPile.iteratorBefore(doubleClickedCard); // get iterator position just before double-clicked card, then flip that card and all cards after
+                while (posBeforeCard.hasNext()) {
+                    Card card = posBeforeCard.next(); // moves to double-clicked card then to following cards
+                    card.flipCard(); // flips card
+                }
+            }
 
 		// What happens here when a pile is double clicked?
 		
@@ -253,6 +257,8 @@ public class CardGame extends JComponent {
         public void mousePressed(MouseEvent e) {
 	    // FILL IN
 	    // What happens here when the mouse is pressed?
+            pileUnderMouse =
+            cardUnderMouse =
         }
 
         /** Release event handler */
