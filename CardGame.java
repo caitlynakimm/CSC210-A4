@@ -59,42 +59,57 @@ public class CardGame extends JComponent {
 	pile[3] = new CardPile(2,302);
 	pile[4] = new CardPile(2,402);
 
-        // Add code here to turn over all the cards
-    //ListIterator goes through each pile to flip all the cards
-    for (CardPile p: pile) {
-        ListIterator<Card> selectedPile = p.listIterator();
-        while (selectedPile.hasNext()) {
-            Card c = selectedPile.next();
-            if (!c.getIsFaceUp()){
+    // Set up event listeners 
+    Responder responder = new Responder();
+
+    addMouseListener(responder); 
+    addMouseMotionListener(responder);
+
+    // Add code here to turn over all the cards
+    //ListIterator goes flips over each card in pile 0 that isn't facing up
+    ListIterator<Card> selectedPile = pile[0].listIterator();
+    while (selectedPile.hasNext()) {
+        Card c = selectedPile.next();
+        if (!c.getIsFaceUp()){
                 c.flipCard();
-            }
         }
     }
 
-        // Sample card movements. 
-        // Uncomment these one at a time to see what they do.
+    // Sample card movements. 
+    // Uncomment these one at a time to see what they do.
 	pile[0].getLast().flipCard(); //flips last card --> Ace
-    pile[1].addLast(pile[0].removeLast()); //move pile 0's flipped last card to pile 1
-    pile[1].addLast(pile[0].removeLast()); //move pile 0's unflipped last card to pile 1, set on top of first card
-    pile[1].addFirst(pile[0].removeFirst()); //move pile 0's unflipped first card to pile 1, under the flipped card
+    //pile[1].addLast(pile[0].removeLast()); //move pile 0's flipped last card to pile 1
+    //pile[1].addLast(pile[0].removeLast()); //move pile 0's unflipped last card to pile 1, set on top of first card
+    //pile[1].addFirst(pile[0].removeFirst()); //move pile 0's unflipped first card to pile 1, under the flipped card
 
-        // Now add your card movements for stage 1 here.
-    pile[2].addFirst(pile[0].remove(0));
-    pile[2].addFirst(pile[0].remove(0));
-    pile[3].addLast(pile[1].removeFirst());
-    pile[3].getFirst().flipCard();
-    pile[4].addAll(pile[0]);
-    pile[4].remove(1);
+    // Now add your card movements for stage 1 here.
+    //pile[2].addFirst(pile[0].remove(0));
+    //pile[2].addFirst(pile[0].remove(0));
+    //pile[3].addLast(pile[1].removeFirst());
+    //pile[3].getFirst().flipCard();
+    //pile[4].addAll(pile[0]);
+    //pile[4].remove(1);
 
-        // Once you have written the split() method in CardPile 
-        // you can uncomment and test the line below.
-        pile[2].addAll(pile[0].split(pile[0].get(26)));
+    // Once you have written the split() method in CardPile 
+    // you can uncomment and test the line below.
+    pile[2].addAll(pile[0].split(pile[0].get(26)));
 
-        // Next try other uses of split.
-        // Then try out the various insert methods.
-        // You should test out all the methods of CardGame that move cards
-        // and make sure that they all work as intended.
-        // FILL IN
+    // Next try other uses of split.
+    // Then try out the various insert methods.
+    // You should test out all the methods of CardGame that move cards
+    // and make sure that they all work as intended.
+    pile[1].addAll(pile[2].split(pile[2].get(8)));
+    //pile[3].addAll(pile[4].split(null)); //throws IllegalStateException since pile 4 is empty, but not null
+    pile[4].addAll(pile[2].split(null)); //all cards from pile 2 is moved to pile 4
+    pile[1].insertAfter(pile[4], pile[1].get(4));
+    pile[1].insertBefore(pile[4], pile[1].get(0));
+    pile[1].insertBefore(pile[0], pile[1].get(8));
+    pile[3].addFirst(pile[1].removeLast());
+    Card cardToInsertOne = pile[1].remove(0);
+    pile[3].insertAfter(cardToInsertOne, pile[3].get(0));
+    Card cardToInsertTwo = pile[1].remove(pile[1].size()-1);
+    pile[3].insertBefore(cardToInsertTwo, pile[3].get(1));
+    pile[3].get(0).flipCard();
     }
 
     /**
@@ -219,8 +234,14 @@ public class CardGame extends JComponent {
         /** Click event handler */
         public void mouseClicked(MouseEvent e) {
             if (e.getClickCount() == 2) {
-		System.out.println("Mouse double click event at ("+e.getX()+","+e.getY()+").");
-                // FILL IN
+		        System.out.println("Mouse double click event at ("+e.getX()+","+e.getY()+").");
+                ListIterator<Card> selectedPile = movingPile.listIterator();
+                //iteratorBefore?
+                while (selectedPile.hasNext()) {
+                Card c = selectedPile.next();
+                if (c == cardUnderMouse || ){
+                    c.flipCard();
+                }
 		// What happens here when a pile is double clicked?
 		
                 repaint();

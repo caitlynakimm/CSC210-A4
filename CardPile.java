@@ -63,6 +63,10 @@ public class CardPile extends LinkedList<Card> {
      * @param mark New card goes before this one
      */
     public void insertBefore(Card card, Card mark) {
+        if (mark == null || !this.contains(mark)) {
+            throw new IllegalArgumentException("insertBefore: mark was not found in pile");
+        }
+
         ListIterator<Card> position = listIterator(size());
         while (position.hasPrevious() && (position.previous() != mark)) {
             // keep going until we find our card
@@ -77,7 +81,11 @@ public class CardPile extends LinkedList<Card> {
      * @param mark New card goes after this one
      */
     public void insertAfter(Card card, Card mark) {
-        ListIterator<Card> position = listIterator(size());
+        if (mark == null || !this.contains(mark)) {
+            throw new IllegalArgumentException("insertBefore: mark was not found in pile");
+        }
+
+        ListIterator<Card> position = listIterator();
         while (position.hasNext() && (position.next() != mark)) {
 
         }
@@ -91,6 +99,10 @@ public class CardPile extends LinkedList<Card> {
      * @param mark   insert before this card
      */
     public void insertBefore(CardPile insert, Card mark) {
+        if (mark == null || !this.contains(mark)) {
+            throw new IllegalArgumentException("insertBefore: mark was not found in pile");
+        }
+
         ListIterator<Card> position = listIterator(size());
         // empty loop to find the position to insert at
         while (position.hasPrevious() && (position.previous() != mark)) {
@@ -109,7 +121,11 @@ public class CardPile extends LinkedList<Card> {
      * @param mark   insert after this point
      */
     public void insertAfter(CardPile insert, Card mark) {
-        ListIterator<Card> position = listIterator(size());
+        if (mark == null || !this.contains(mark)) {
+            throw new IllegalArgumentException("insertBefore: mark was not found in pile");
+        }
+        
+        ListIterator<Card> position = listIterator();
         while (position.hasNext() && (position.next() != mark)) {
 
         }
@@ -137,7 +153,7 @@ public class CardPile extends LinkedList<Card> {
      * @param mark New card goes after this one
      */
     public ListIterator<Card> iteratorAfter(Card mark) {
-        ListIterator<Card> position = listIterator(size());
+        ListIterator<Card> position = listIterator();
         while (position.hasNext() && (position.next() != mark)) {
             // keep going until we find our card
         }
@@ -153,12 +169,24 @@ public class CardPile extends LinkedList<Card> {
      * @return the suffix pile
      */
     public CardPile split(Card mark) {
-        // FILL IN -- return value below is temporary, for clean compile
-        CardPile newPile = new CardPile(0,0);
-        if (mark == null) {
-            newPile.insertAfter(card, mark);
+        if (this.isEmpty()) {
+            throw new IllegalStateException("Cannot split an empty pile.");
         }
 
+        CardPile newPile = new CardPile(0,0);
+        
+        if (mark == null) {
+            newPile.addAll(this);
+            this.clear();
+            return newPile;
+        }
+
+        ListIterator<Card> position = this.iteratorBefore(mark); // get iterator position just before mark, then move mark and all cards after
+        while (position.hasNext()) {
+            Card card = position.next(); // moves to mark then to following cards
+            position.remove(); // removes card from original pile
+            newPile.addLast(card); // adds card to newPile, preserving original order
+        }
         return newPile;
     }
 
