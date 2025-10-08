@@ -20,6 +20,7 @@ Any references used besides JavaDoc and course materials:
 
 
 If you used AI, please describe how and the interaction between AI and your understanding of this assignment and specifically the related data structures and algorithms:
+- mouseReleased() was complex for me to implement and I had a NoSuchElementException that could occur whenever I released the dragged pile outside of any pile.
 
 ## Reflection
 
@@ -30,5 +31,5 @@ What was the major challenge you faced in completing this assignment?
 
 
 What do you feel you learned from this assignment?
-
+- I think I got a better understanding how linked lists can be shrunken/grow bigger and move through iterators and loops.
 
