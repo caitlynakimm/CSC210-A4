@@ -257,8 +257,17 @@ public class CardGame extends JComponent {
         public void mousePressed(MouseEvent e) {
 	    // FILL IN
 	    // What happens here when the mouse is pressed?
-            pileUnderMouse =
-            cardUnderMouse =
+            int x = e.getX();
+            int y = e.getY();
+
+            pileUnderMouse = locatePile(x, y);
+            cardUnderMouse = locateCard(x, y);
+
+            if (pileUnderMouse == null) {
+                System.out.println("No pile was clicked on, so no card was clicked on.");
+                cardUnderMouse = null;
+            }
+        
         }
 
         /** Release event handler */
@@ -284,6 +293,23 @@ public class CardGame extends JComponent {
 	    // FILL IN
 	    // What happens when the mouse is dragged?
 	    // What if it is the first drag after a mouse down?
+            
+            if (movingPile == null) {
+                if (pileUnderMouse == null) {
+                    
+                }
+                if (cardUnderMouse == null) {
+                }
+            }
+            if (movingPile != null) {
+                movingPileX = e.getX();
+                movingPileY = e.getY();
+            } else {
+
+                movingPile = pileUnderMouse.split(cardUnderMouse);
+                movingPileX = e.getX();
+                movingPileY = e.getY();
+            }
         }
 
         /** Move event handler */

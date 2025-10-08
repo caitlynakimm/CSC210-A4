@@ -14,7 +14,7 @@ Other Collaborators (submitting related but non-identical code):
 
 
 Kudos/shout-out to particularly helpful members of the class or teaching staff:
-- 
+- Shout out to Tabitha from class who helped me think about how to start the mouseClicked() method from Stage 2. Also, shout out to Tania (TA) who helped me check the logic of some of my Stage 2 methods.
 
 Any references used besides JavaDoc and course materials:
 
