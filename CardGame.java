@@ -247,8 +247,8 @@ public class CardGame extends JComponent {
 		// What happens here when a pile is double clicked?
 		
                 repaint();
-            }
         }
+
 
         /**
          * Press event handler stores card currently under mouse,
@@ -272,11 +272,31 @@ public class CardGame extends JComponent {
 
         /** Release event handler */
         public void mouseReleased(MouseEvent e) {
-            if (movingPile != null) {
-		// FILL IN
-                // We have a pile coming to rest -- where? what happens?
+            int x = e.getX();
+            int y = e.getY();
 
+            if (movingPile != null) { //checks if user is actually dragging cards
+		    // FILL IN
+            // We have a pile coming to rest -- where? what happens?
+                CardPile targetPile = locatePile(x, y);
+                Card targetCard = locateCard(x, y);
+
+                if (targetPile != null) { //if a pile was found at location where mouse was released
+                    if (targetCard != null && targetPile.contains(targetCard)) {
+                        targetPile.insertAfter(movingPile, targetCard);
+                    } else {
+                        Card lastCard = targetPile.getLast();
+                        if (lastCard != null) { //if targetPile is not empty
+                            targetPile.insertAfter(movingPile, lastCard);
+                        } else { //if targetPile is empty (which also means not null)
+                            targetPile.append(movingPile);
+                        }
+                    }
+                } else {
+                    // do nothing if the targetPile is null (if no pile was found where mouse was released)
+                }
             }
+            movingPile = null;
             repaint();
         }
 
@@ -294,22 +314,28 @@ public class CardGame extends JComponent {
 	    // What happens when the mouse is dragged?
 	    // What if it is the first drag after a mouse down?
             
+            //user is beginning new drag sequence (movingPile is empty)
             if (movingPile == null) {
-                if (pileUnderMouse == null) {
-                    
+                if (pileUnderMouse == null) { //clicked outside any pile --> no dragging should occur
+                    return;
                 }
+                //splitting cards: 
+                //if cardUnderMouse is null --> entire pile is saved in movingPile
+                //if cardUnderMouse isn't null --> split pile from cardUnderMouse to the end and save in movingPile
                 if (cardUnderMouse == null) {
+                    movingPile = pileUnderMouse.split(cardUnderMouse);
+                } else {
+                    movingPile = pileUnderMouse.split(cardUnderMouse);
                 }
             }
-            if (movingPile != null) {
-                movingPileX = e.getX();
-                movingPileY = e.getY();
-            } else {
 
-                movingPile = pileUnderMouse.split(cardUnderMouse);
-                movingPileX = e.getX();
-                movingPileY = e.getY();
+            // user is already dragging a pile --> updates its coordinates
+            if (movingPile != null) {
+                movingPile.setX(e.getX());
+                movingPile.setY(e.getY());
             }
+
+            repaint();
         }
 
         /** Move event handler */
