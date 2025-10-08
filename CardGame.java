@@ -234,7 +234,7 @@ public class CardGame extends JComponent {
         /** Click event handler */
         public void mouseClicked(MouseEvent e) {
             if (e.getClickCount() == 2) {
-		        System.out.println("Mouse double click event at ("+e.getX()+","+e.getY()+").");
+		System.out.println("Mouse double click event at ("+e.getX()+","+e.getY()+").");
                 CardPile currentPile = locatePile(e.getX(), e.getY());
                 Card doubleClickedCard = locateCard(e.getX(), e.getY());
                 ListIterator<Card> posBeforeCard = currentPile.iteratorBefore(doubleClickedCard); // get iterator position just before double-clicked card, then flip that card and all cards after
@@ -292,11 +292,10 @@ public class CardGame extends JComponent {
                             targetPile.append(movingPile);
                         }
                     }
-                } else {
-                    // do nothing if the targetPile is null (if no pile was found where mouse was released)
-                }
+                } 
+                movingPile = null;
+ 
             }
-            movingPile = null;
             repaint();
         }
 
@@ -314,7 +313,7 @@ public class CardGame extends JComponent {
 	    // What happens when the mouse is dragged?
 	    // What if it is the first drag after a mouse down?
             
-            //user is beginning new drag sequence (movingPile is empty)
+            //user is beginning new drag sequence
             if (movingPile == null) {
                 if (pileUnderMouse == null) { //clicked outside any pile --> no dragging should occur
                     return;
