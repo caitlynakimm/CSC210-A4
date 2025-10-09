@@ -99,7 +99,7 @@ public class CardGame extends JComponent {
     // You should test out all the methods of CardGame that move cards
     // and make sure that they all work as intended.
     pile[1].addAll(pile[2].split(pile[2].get(8)));
-    //pile[3].addAll(pile[4].split(null)); //throws IllegalStateException since pile 4 is empty, but not null
+    //pile[3].addAll(pile[4].split(null)); //throws IllegalStateException since can't split empty pile (pile 4)
     pile[4].addAll(pile[2].split(null)); //all cards from pile 2 is moved to pile 4
     pile[1].insertAfter(pile[4], pile[1].get(4));
     pile[1].insertBefore(pile[4], pile[1].get(0));
@@ -231,10 +231,15 @@ public class CardGame extends JComponent {
     
     /** Listener for relevant mouse events */
     private class Responder implements MouseListener, MouseMotionListener {
+        
         /** Click event handler */
+        /**
+         * Deals with mouse click events. On double-click, flip the clicked card and all cards following it in the pile
+         * @param e the mouse event containing click location
+         */
         public void mouseClicked(MouseEvent e) {
             if (e.getClickCount() == 2) {
-		System.out.println("Mouse double click event at ("+e.getX()+","+e.getY()+").");
+		        System.out.println("Mouse double click event at ("+e.getX()+","+e.getY()+").");
                 CardPile currentPile = locatePile(e.getX(), e.getY());
                 Card doubleClickedCard = locateCard(e.getX(), e.getY());
                 ListIterator<Card> posBeforeCard = currentPile.iteratorBefore(doubleClickedCard); // get iterator position just before double-clicked card, then flip that card and all cards after
@@ -246,7 +251,7 @@ public class CardGame extends JComponent {
 
 		// What happens here when a pile is double clicked?
 		
-                repaint();
+            repaint();
         }
 
 
@@ -271,6 +276,12 @@ public class CardGame extends JComponent {
         }
 
         /** Release event handler */
+        /**
+         * Deals with mouse releases. When dragging cards, places movingPile into targetPile at correct location
+         * If released over a certain card, inserts movingPile after that card
+         * If released over empty pile, appends movingPile to the pile
+         * @param e the mouse event containing release position
+         */
         public void mouseReleased(MouseEvent e) {
             int x = e.getX();
             int y = e.getY();
@@ -285,10 +296,10 @@ public class CardGame extends JComponent {
                     if (targetCard != null && targetPile.contains(targetCard)) {
                         targetPile.insertAfter(movingPile, targetCard);
                     } else {
-                        Card lastCard = targetPile.getLast();
-                        if (lastCard != null) { //if targetPile is not empty
+                        if (!targetPile.isEmpty()) { //if targetPile is not empty, can call getLast()
+                            Card lastCard = targetPile.getLast();
                             targetPile.insertAfter(movingPile, lastCard);
-                        } else { //if targetPile is empty (which also means not null)
+                        } else { //if targetPile is empty (which also means not null) just append movingPile
                             targetPile.append(movingPile);
                         }
                     }
@@ -308,6 +319,11 @@ public class CardGame extends JComponent {
         }
 
         /** Drag event handler moves piles around */
+        /**
+         * Deals with mouse drag events.
+         * Initialize card dragging via splitting original pile and updates movingPile's position to follow mouse's position
+         * @param e the mouse event containing current drag position
+         */
         public void mouseDragged(MouseEvent e) {
 	    // FILL IN
 	    // What happens when the mouse is dragged?

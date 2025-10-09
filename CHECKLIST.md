@@ -10,25 +10,25 @@ your work, please indicate the status of each item
 
 ## Assignment Points:
 
-_____ 1 pt: Correctly implement `insertAfter` (single card version)
+__YES___ 1 pt: Correctly implement `insertAfter` (single card version)
 
-_____ 1 pt: Correctly implement `insertAfter` (pile version)
+__YES___ 1 pt: Correctly implement `insertAfter` (pile version)
 
-_____ 1 pt: Correctly implement `iteratorAfter`
+__YES___ 1 pt: Correctly implement `iteratorAfter`
 
-_____ 1 pt: Correctly implement `split`
+__YES___ 1 pt: Correctly implement `split`
 
-_____ 1 pts: Demonstrate the four methods above by using them in the `CardGame` constructor
+___YES__ 1 pts: Demonstrate the four methods above by using them in the `CardGame` constructor
 
-_____ 1 pt: Correctly implement double-click event handler
+__YES___ 1 pt: Correctly implement double-click event handler
 
-_____ 1 pt: Correctly implement mouse press handler
+__YES___ 1 pt: Correctly implement mouse press handler
 
-_____ 1 pt: Correctly implement mouse release handler
+___YES__ 1 pt: Correctly implement mouse release handler
 
-_____ 1 pt: Correctly implement mouse drag handler
+__YES___ 1 pt: Correctly implement mouse drag handler
 
-_____ 1 pt: GUI program fully functional
+__YES___ 1 pt: GUI program fully functional
 
 ## Kudos (Extra Challenge):
 
@@ -37,22 +37,22 @@ ______ Wrote version using SLL class for card pile
 
 ## General Items:
 
-_____ 4 pts: Program compiles without errors or warnings
+__YES___ 4 pts: Program compiles without errors or warnings
 
-_____ 2 pts: Executes fully & consistently without crashing (exception/freeze)
+___YES__ 2 pts: Executes fully & consistently without crashing (exception/freeze)
 
-_____ 2 pt: Complies with style guidelines (missing items 1 pt each):
+__YES___ 2 pt: Complies with style guidelines (missing items 1 pt each):
 
-      _____ Classes & class members all have Javadoc header comments
+      __YES___ Classes & class members all have Javadoc header comments
 
-      _____ Clear and consistent indentation of bracketed sections
+      __YES___ Clear and consistent indentation of bracketed sections
 
-      _____ Adheres to Java conventions on naming & capitalization
+      ___YES__ Adheres to Java conventions on naming & capitalization
 
-      _____ Methods & variables all have clear and accurate names
+      ___YES__ Methods & variables all have clear and accurate names
 
-      _____ Methods avoid confusing side effects
+      __YES___ Methods avoid confusing side effects
 
-_____ 1 pt: All required files included with submission
+__YES___ 1 pt: All required files included with submission
 
-_____ 1 pt: readme.md contains reflection on the assignment
+__YES___ 1 pt: readme.md contains reflection on the assignment
